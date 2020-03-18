@@ -29,6 +29,17 @@ namespace GradeBook
             return highGrade;
         }
 
+        public static double GetLowGrade(List<double> grades)
+        {
+            if (grades.Count <= 0) throw new ArgumentNullException("Grades está vazio");
+            var lowGrade = double.MaxValue;
+            foreach (var grade in grades)
+            {
+                lowGrade = grade < lowGrade ? grade : lowGrade;
+            }
+            return lowGrade;
+        }
+
         public static void ShowGrades(List<double> grades)
         {
             if (grades.Count <= 0)

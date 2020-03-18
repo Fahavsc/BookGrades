@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GradeBook
 {
@@ -29,6 +30,18 @@ namespace GradeBook
         public List<double> getGrades()
         {
             return this.grades;
+        }
+
+        public void ShowStatistics()
+        {
+            var averageGrade = Utils.ComputeAverageGrade(this.grades);
+            var highGrade = Utils.GetHighGrade(this.grades);
+            var lowGrade = Utils.GetLowGrade(this.grades);
+
+            Console.WriteLine($"\nEstatisticas das notas do(a) aluno(a) {this.name}");
+            Console.WriteLine($"\nA media das de notas é: {averageGrade}");
+            Console.WriteLine($"\nA menor nota é: {lowGrade}");
+            Console.WriteLine($"\nA maior nota é: {highGrade}");
         }
 
     }
