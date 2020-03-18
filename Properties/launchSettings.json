@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "GradeBook": {
+      "commandName": "Project",
+      "commandLineArgs": "Fabricio",
+      "environmentVariables": {
+        "Key": "Value"
+      }
+    }
+  }
+}
