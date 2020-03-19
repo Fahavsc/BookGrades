@@ -3,18 +3,19 @@ using System.Collections.Generic;
 
 namespace GradeBook
 {
-    class Book
+    public class Book
     {
 
         //Fields, Atributos
         private List<double> grades;
         private string name;
-
+        private Statistics stats;
 
         //Construtor
         public Book(string name)
         {
             grades = new List<double>();
+            stats = new Statistics();
             this.name = name;
         }
 
@@ -27,22 +28,30 @@ namespace GradeBook
             this.grades.Add(grade);
         }
 
-        public List<double> getGrades()
+        public List<double> GetGrades()
         {
             return this.grades;
         }
 
-        public void ShowStatistics()
+        public Statistics GetStatistics()
         {
-            var averageGrade = Utils.ComputeAverageGrade(this.grades);
-            var highGrade = Utils.GetHighGrade(this.grades);
-            var lowGrade = Utils.GetLowGrade(this.grades);
-
-            Console.WriteLine($"\nEstatisticas das notas do(a) aluno(a) {this.name}");
-            Console.WriteLine($"\nA media das de notas é: {averageGrade}");
-            Console.WriteLine($"\nA menor nota é: {lowGrade}");
-            Console.WriteLine($"\nA maior nota é: {highGrade}");
+            SetStatistics();
+            return this.stats;
         }
 
+        private void SetStatistics()
+        {
+            this.stats.Average = Utils.ComputeAverageGrade(this.grades);
+            this.stats.High = Utils.GetHighGrade(this.grades);
+            this.stats.Low = Utils.GetLowGrade(this.grades);
+        }
+
+        public void ShowStatistics()
+        {
+            Console.WriteLine($"\nEstatisticas das notas do(a) aluno(a) {this.name}");
+            Console.WriteLine($"\nA media das de notas é: {this.stats.Average}");
+            Console.WriteLine($"\nA menor nota é: {this.stats.Low}");
+            Console.WriteLine($"\nA maior nota é: {this.stats.High}");
+        }
     }
 }
