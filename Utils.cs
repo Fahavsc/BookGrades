@@ -10,10 +10,13 @@ namespace GradeBook
         {
 
             var result = 0.0;
-            foreach (var grade in grades)
+            var index = 0;
+            //Do While
+            do
             {
-                result += grade;
-            }
+                result += grades[index];
+                index++;
+            } while (index < grades.Count);
 
             return result /= grades.Count;
         }
@@ -22,9 +25,10 @@ namespace GradeBook
         {
             if (grades.Count <= 0) throw new ArgumentNullException("Grades está vazio");
             var highGrade = double.MinValue;
-            foreach (var grade in grades)
+            //For comum
+            for(int index = 0; index < grades.Count; index++) 
             {
-                highGrade = grade > highGrade ?  grade : highGrade;
+                highGrade = grades[index] > highGrade ?  grades[index] : highGrade;
             }
             return highGrade;
         }
@@ -33,24 +37,35 @@ namespace GradeBook
         {
             if (grades.Count <= 0) throw new ArgumentNullException("Grades está vazio");
             var lowGrade = double.MaxValue;
-            foreach (var grade in grades)
+            //ForEach
+            //foreach (var grade in grades)
+            //{
+            //    lowGrade = grade < lowGrade ? grade : lowGrade;
+            //}
+            var index = 0;
+            while(index < grades.Count)
             {
-                lowGrade = grade < lowGrade ? grade : lowGrade;
+                lowGrade = grades[index] < lowGrade ? grades[index] : lowGrade;
+                index++;
             }
             return lowGrade;
         }
 
-        public static void ShowGrades(List<double> grades)
+        public static char ClassifyByGrade(double grade)
         {
-            if (grades.Count <= 0)
+
+            switch(grade)
             {
-                Console.WriteLine("Não há nenhuma nota para ser exibida");
-                return;//Verifica se grade é menor que zero se sim não executa
-            }
-            Console.WriteLine("Notas registradas:");
-            foreach (var grade in grades)
-            {
-                Console.WriteLine($"\nNota: {grade}");
+                case var d when d >= 90.0:
+                    return 'A';
+                case var d when d >= 80:
+                    return 'B';
+                case var d when d >= 70:
+                    return 'C';
+                case var d when d >= 60:
+                    return 'D';
+                default:
+                    return 'F';
             }
         }
     }

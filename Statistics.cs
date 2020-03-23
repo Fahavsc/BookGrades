@@ -12,5 +12,7 @@ namespace GradeBook
 
         public double High;
 
+        public char Letter;
+
     }
 }
