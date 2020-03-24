@@ -8,18 +8,40 @@ namespace GradeBook
 
         //Fields, Atributos
         private List<double> grades;
-        public string Name;
         private Statistics stats;
+        //readonly string category = "Ciencias";   //Só pode ser alterado no construtor ou na forma que está explicita ao lado (Criando e inicializando a variável)
 
+        public const string CATEGORY = "Ciencias"; //Variavel deve ser inicializada assim que declarada e não podera ser alterada de outra forma 
+                                                   //Campos Const são tratados externamente como campos estaticos, deve se o usar o tipo da classe para fazer referencia ao memsmo
+        
         //Construtor
         public Book(string name)
         {
+            
             grades = new List<double>();
             stats = new Statistics();
             this.Name = name;
         }
 
-        public void AddLetterGrade(char letter)
+        public string Name
+        {
+            //get
+            //{
+            //    return this.name;
+            //}
+            //set
+            //{
+            //    //Setters no C# possuem um valor value encapsulado o qual não necessita ser passado por parametro
+            //    //Quando é feita uma atribuição ao Name o proprio compilador interpreata que o Seter esta sendo chamado e realiza as ações que estiverem dentro do Bloco Set
+            //    if (!String.IsNullOrEmpty(value)) 
+            //        name = value;                 
+            //    else
+            //        throw new ArgumentNullException($"{nameof(value)} não pode ser Null ou vazio : {value}");
+            //}
+            get; private set;
+        }
+
+        public void AddGrade(char letter)
         {
             switch (letter)
             {
