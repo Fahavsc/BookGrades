@@ -38,8 +38,12 @@ namespace GradeBook
             //    else
             //        throw new ArgumentNullException($"{nameof(value)} não pode ser Null ou vazio : {value}");
             //}
-            get; private set;
+            get; set;
         }
+
+        public delegate void GradeAddedDelegate(object sender, EventArgs args);
+
+        public event GradeAddedDelegate GradeAdded;
 
         public void AddGrade(char letter)
         {
@@ -65,6 +69,10 @@ namespace GradeBook
             if (nota <= 100 && nota >= 0)
             {
                 this.grades.Add(nota);
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             }else
             {
                 throw new ArgumentException($"Valor da {nameof(nota)} inválido : {nota}");

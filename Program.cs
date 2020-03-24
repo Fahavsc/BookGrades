@@ -15,9 +15,11 @@ namespace GradeBook
             Console.WriteLine("Insira seu nome:");
             var name = Console.ReadLine();
             var book = new Book(name);
-            var input = "";
+            book.GradeAdded += OnGradeAdded;
+            //ou (object sender, EventArgs e) => { };
             do
             {
+                var input = "";
                 Console.WriteLine("\nInsira uma nota entre 0 e 100:");
                 Console.WriteLine("\nPara sair digite Q e pressione enter");
                 input = Console.ReadLine();
@@ -27,6 +29,7 @@ namespace GradeBook
                     {
                         var grade = Double.Parse(input);
                         book.AddGrade(grade);
+                        System.Threading.Thread.Sleep(5000);
                         Console.Clear();
                     }
                     catch(ArgumentException aex)
@@ -52,6 +55,11 @@ namespace GradeBook
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        static void OnGradeAdded(object sender, EventArgs e)
+        {
+            Console.WriteLine("A grade was Added");
         }
     }
 }
